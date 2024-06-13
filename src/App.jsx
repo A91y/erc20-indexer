@@ -19,8 +19,9 @@ function App() {
   const [tokenDataObjects, setTokenDataObjects] = useState([]);
 
   async function getTokenBalance() {
+    const env = await import.meta.env;
     const config = {
-      apiKey: '<-- COPY-PASTE YOUR ALCHEMY API KEY HERE -->',
+      apiKey:   (env.VITE_ALCHEMY_API),
       network: Network.ETH_MAINNET,
     };
 
@@ -42,6 +43,7 @@ function App() {
     setHasQueried(true);
   }
   return (
+    
     <Box w="100vw">
       <Center>
         <Flex
@@ -76,7 +78,7 @@ function App() {
           bgColor="white"
           fontSize={24}
         />
-        <Button fontSize={20} onClick={getTokenBalance} mt={36} bgColor="blue">
+        <Button fontSize={20} onClick={getTokenBalance} mt={36} bgColor="#rococo">
           Check ERC-20 Token Balances
         </Button>
 
@@ -89,9 +91,11 @@ function App() {
                 <Flex
                   flexDir={'column'}
                   color="white"
-                  bg="blue"
+                  bg="transparent"
                   w={'20vw'}
                   key={e.id}
+                  border={'1px solid #000001'}
+                  p={10}
                 >
                   <Box>
                     <b>Symbol:</b> ${tokenDataObjects[i].symbol}&nbsp;
